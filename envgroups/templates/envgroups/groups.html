@@ -1,0 +1,6 @@
+{% extends 'envgroups/main.html' %}
+{% block main %}
+    {% for group in groups %}
+        <p>{{ group.title }}</p>
+    {% endfor %}
+{% endblock %}

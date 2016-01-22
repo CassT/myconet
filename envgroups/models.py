@@ -26,11 +26,12 @@ class Group(models.Model):
     products    = models.TextField()
     hiring      = models.CharField(max_length=1, choices=BINARY_CHOICE)
     hiring_text = models.TextField()
-    gtype       = models.CharField(max_length=1, choices=TYPES)
+    gtype       = models.CharField(max_length=2, choices=TYPES)
     link        = models.CharField(max_length=300)
     connections = models.TextField()
 
 class Event(models.Model):
+    group       = models.CharField(max_length=200)
     name        = models.CharField(max_length=200)
     time        = models.DateTimeField()
     location    = models.TextField()
