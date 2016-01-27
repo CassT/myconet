@@ -3,15 +3,23 @@
       {% block title %}
          <title>MyCoNet</title>
       {% endblock %}
+      {% load staticfiles %}
+      <link href="{% static 'envgroups/css/envgroups.css' %}" rel="stylesheet" type="text/css">
+      {% block additional_headers %} {% endblock %}
   </head>
   <body>
       <!--Default Navigation Bar-->
-      <div style="width:100%;background-color:green;height:50px;" id="navbar">
-          <a style="float:left;clear:none;width:100px;background-color:blue;display:block;height:46px;padding-right:5px;" href="">Home</a>
-          <a style="float:left;clear:none;width:100px;background-color:blue;display:block;height:46px;padding-right:5px;" href="">About</a>
-          <a style="float:left;clear:none;width:100px;background-color:blue;display:block;height:46px;padding-right:5px;" href="">Log</a>
+      <img style="width:100%;" src="{% static 'envgroups/img/banner.jpg' %}">
+      <div id="navbar">
+          <img src="{% static 'envgroups/img/small-earth.png' %}" id="earth-icon">
+          <a href="/" class="banner-link">Home</a>
+          <a href="/about" class="banner-link">About</a>
+          <a href="/login" class="banner-link" id="login-link">Login</a>
       </div>
       {% block main %}
       {% endblock %}
+      <div id="events-footer">
+          <a href="">Upcoming Event: MyCoNet Launch Party</a>
+      </div>
   <body>
 </html>

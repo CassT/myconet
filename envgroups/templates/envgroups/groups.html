@@ -1,6 +1,70 @@
 {% extends 'envgroups/main.html' %}
 {% block main %}
+    <div class="search-bar">
+        <form>
+            <div id="searchbar"> 
+                Search:<input type="text" name="search_term"> 
+            </div>
+            <div id="dropdown">
+              Type: <select>
+                <option value="">Any</option>
+                <option value="SG">Student Group</option>
+                <option value="FP">For Profit</option>
+                <option value="NP">Non Profit</option>
+              </select>
+              Categories:<select>
+                <option value="">Any</option>
+                <option value="FO">Food</option>
+                <option value="SO">Social</option>
+                <option value="EN">Energy</option>
+                <option value="AC">Activism</option>
+                <option value="EV">Environment</option>
+                <option value="PR">Projects</option>
+                <option value="AR">Arts</option>
+                <option value="ED">Education</option>
+                <option value="PO">Policy</option>
+              </select>
+              <input type="submit" value="Search">
+            </div>
+        </form>
+    </div>
     {% for group in groups %}
-        <p>{{ group.title }}</p>
+      <div class="group-container">
+        <h3>{{ group.title }}</h3>
+        <p>Categories:
+        {% if group.food %}
+            Food
+        {% endif %}
+        {% if group.social %}
+            Social
+        {% endif %}
+        {% if group.energy %}
+            Energy
+        {% endif %}
+        {% if group.activism %}
+            Activism
+        {% endif %}
+        {% if group.environment %}
+            Environment
+        {% endif %}
+        {% if group.projects %}
+            Projects
+        {% endif %}
+        {% if group.arts %}
+            Arts
+        {% endif %}
+        {% if group.education %}
+            Education
+        {% endif %}
+        {% if group.policy %}
+            Policy
+        {% endif %}
+        {% if group.wellness %}
+            Wellness
+        {% endif %}
+        </p>
+        <p>{{ group.mission }}</p>
+      </div>
     {% endfor %}
+
 {% endblock %}

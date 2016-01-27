@@ -1,0 +1,20 @@
+{% extends 'envgroups/main.html' %}
+{% block main %}
+    <div class="search-bar">
+        <form>
+            <div id="searchbar">
+                Search:<input type="text" name="search_term">
+                <input type="submit" value="Search">
+            </div>
+        </form> 
+    </div>
+    {% for event in events %}
+      <div class="group-container">
+        <p>Group: {{ event.group }}</p>
+        <p>Title: {{ event.name }}</p>
+        <p>Location: {{ event.location }}</p>
+        <p>Description: {{ event.description }}</p>
+        <p>Link: <a href="{{event.link}}">{{event.link}}</a></p>
+      </div>
+    {% endfor %}
+{% endblock %}

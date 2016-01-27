@@ -5,6 +5,9 @@ from models import Group, Event
 def index(request):
     return render(request, 'envgroups/index.html')
 
+def about(request):
+    return render(request, 'envgroups/about.html')
+
 def groups(request):
     GROUPS = Group.objects.all()
     context = {'groups':GROUPS}

@@ -4,10 +4,15 @@ from django.db import models
 class Group(models.Model):
     # Need to add picture upload somewhere
     CATEGORIES = (
-        ('F','Food'),
-        ('S','Social'),
-        ('E','Energy'),
-        ('A','Activism')
+        ('FO','Food'),
+        ('SO','Social'),
+        ('EN','Energy'),
+        ('AC','Activism'),
+        ('EV','Environment'),
+        ('PR','Projects'),
+        ('AR','Arts'),
+        ('ED','Education'),
+        ('PO','Policy'), 
     )
     BINARY_CHOICE = (
         ('Y','Yes'),
@@ -18,7 +23,17 @@ class Group(models.Model):
         ('FP','For Profit'),
         ('NP','Non Profit'),
     )
-    category    = models.CharField(max_length=1, choices=CATEGORIES)
+#    category    = models.CharField(max_length=2, choices=CATEGORIES)
+    food        = models.BooleanField(default=False)
+    social      = models.BooleanField(default=False)
+    energy      = models.BooleanField(default=False)
+    activism    = models.BooleanField(default=False)
+    environment = models.BooleanField(default=False)
+    projects    = models.BooleanField(default=False)
+    arts        = models.BooleanField(default=False)
+    education   = models.BooleanField(default=False)
+    policy      = models.BooleanField(default=False)
+    wellness    = models.BooleanField(default=False)
     title       = models.CharField(max_length=200)
     mission     = models.TextField()
     employees   = models.TextField()
