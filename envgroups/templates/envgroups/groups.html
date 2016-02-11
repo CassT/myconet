@@ -1,18 +1,18 @@
 {% extends 'envgroups/main.html' %}
 {% block main %}
     <div class="search-bar">
-        <form>
+        <form method="POST" action="/groups/"> {% csrf_token %}
             <div id="searchbar"> 
                 Search:<input type="text" name="search_term"> 
             </div>
             <div id="dropdown">
-              Type: <select>
+              Type: <select name="group-type">
                 <option value="">Any</option>
                 <option value="SG">Student Group</option>
                 <option value="FP">For Profit</option>
                 <option value="NP">Non Profit</option>
               </select>
-              Categories:<select>
+              Categories:<select name='group-category'>
                 <option value="">Any</option>
                 <option value="FO">Food</option>
                 <option value="SO">Social</option>
@@ -30,7 +30,9 @@
     </div>
     {% for group in groups %}
       <div class="group-container">
-        <h3>{{ group.title }}</h3>
+        <h3><a href="/groups/?group_id={{ group.id }}">
+            {{ group.title }}
+        </a></h3>
         <p>Categories:
         {% if group.food %}
             Food
@@ -64,6 +66,16 @@
         {% endif %}
         </p>
         <p>{{ group.mission }}</p>
+        {% if getTrue %}
+            <p>Employees: {{ group.employees }}</p>
+            <p>Location: {{ group.location }}</p>
+            <p>Products: {{ group.products }}</p>
+            <p>Hiring: {{ group.hiring }}</p>
+            <p>{{ group.hiring_text }}</p>
+            <p>Type: {{ group.gtype }}</p>
+            <p>Link: <a href="{{ group.link }}">{{group.link}}</a></p>
+            <p>Connections: {{ group.connections }}</p>
+        {% endif %}
       </div>
     {% endfor %}
 

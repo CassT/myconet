@@ -5,6 +5,7 @@
       {% endblock %}
       {% load staticfiles %}
       <link href="{% static 'envgroups/css/envgroups.css' %}" rel="stylesheet" type="text/css">
+      <link href="{% static 'envgroups/img/small-earth.png' %}" rel="icon" type="image/png">
       {% block additional_headers %} {% endblock %}
   </head>
   <body>
@@ -14,7 +15,11 @@
           <img src="{% static 'envgroups/img/small-earth.png' %}" id="earth-icon">
           <a href="/" class="banner-link">Home</a>
           <a href="/about" class="banner-link">About</a>
-          <a href="/login" class="banner-link" id="login-link">Login</a>
+          {% if user.is_authenticated %}
+              <a href="/logout" class="banner-link" id="login-link">Logout</a>
+          {% else %}
+              <a href="/login" class="banner-link" id="login-link">Login</a>
+          {% endif %} 
       </div>
       {% block main %}
       {% endblock %}

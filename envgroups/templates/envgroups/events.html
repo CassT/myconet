@@ -1,7 +1,7 @@
 {% extends 'envgroups/main.html' %}
 {% block main %}
     <div class="search-bar">
-        <form>
+        <form method="POST" action="/events/"> {% csrf_token %}
             <div id="searchbar">
                 Search:<input type="text" name="search_term">
                 <input type="submit" value="Search">
@@ -11,10 +11,45 @@
     {% for event in events %}
       <div class="group-container">
         <p>Group: {{ event.group }}</p>
-        <p>Title: {{ event.name }}</p>
+        <a href=/events?event_id={{ event.id }}>
+            <p>Title: {{ event.name }}</p>
+        </a>
+        <p>Time: {{ event.time }}</p>
         <p>Location: {{ event.location }}</p>
         <p>Description: {{ event.description }}</p>
         <p>Link: <a href="{{event.link}}">{{event.link}}</a></p>
+        <p>Category:
+        {% if group.food %}
+            Food
+        {% endif %}
+        {% if group.social %}
+            Social
+        {% endif %}
+        {% if group.energy %}
+            Energy
+        {% endif %}
+        {% if group.activism %}
+            Activism
+        {% endif %}
+        {% if group.environment %}
+            Environment
+        {% endif %}
+        {% if group.projects %}
+            Projects
+        {% endif %}
+        {% if group.arts %}
+            Arts
+        {% endif %}
+        {% if group.education %}
+            Education
+        {% endif %}
+        {% if group.policy %}
+            Policy
+        {% endif %}
+        {% if group.wellness %}
+            Wellness
+        {% endif %}
+      </p>
       </div>
     {% endfor %}
 {% endblock %}
