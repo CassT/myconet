@@ -75,6 +75,14 @@
             <p>Type: {{ group.gtype }}</p>
             <p>Link: <a href="{{ group.link }}">{{group.link}}</a></p>
             <p>Connections: {{ group.connections }}</p>
+                {% if events %}
+                <p>Events:</p>
+                    <ul>
+                        {% for event in events %}
+                            <li><a href="/events/?event_id={{ event.id }}">{{ event.time }}  {{ event.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
         {% endif %}
       </div>
     {% endfor %}

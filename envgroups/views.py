@@ -26,7 +26,7 @@ def about(request):
     return render(request, 'envgroups/about.html')
 
 def groups(request):
-    GROUPS = Group.objects.all()
+    GROUPS = Group.objects.order_by('title')
     context = {}
     if request.method == 'POST':
         gtype = request.POST.get('group-type')
@@ -59,10 +59,13 @@ def groups(request):
                     new_groups.append(G)
             GROUPS = new_groups
     if request.method == 'GET' and 'group_id' in request.GET:
+        present = datetime.now()
         context['getTrue'] = True
         gid = request.GET.get('group_id')
         GROUPS = Group.objects.filter(id=gid)
+        EVENTS = Event.objects.filter(group=GROUPS[0].title).filter(time__gte=present).order_by('time')
         context['group_id'] = gid
+        context['events'] = EVENTS
     else:
         context['getTrue'] = False 
     context['groups'] = GROUPS 

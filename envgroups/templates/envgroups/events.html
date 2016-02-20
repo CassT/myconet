@@ -10,43 +10,43 @@
     </div>
     {% for event in events %}
       <div class="group-container">
-        <p>Group: {{ event.group }}</p>
         <a href=/events?event_id={{ event.id }}>
-            <p>Title: {{ event.name }}</p>
+            {{ event.name }}
         </a>
+        <p>Group: {{ event.group }}</p>
         <p>Time: {{ event.time }}</p>
         <p>Location: {{ event.location }}</p>
         <p>Description: {{ event.description }}</p>
         <p>Link: <a href="{{event.link}}">{{event.link}}</a></p>
         <p>Category:
-        {% if group.food %}
+        {% if event.food %}
             Food
         {% endif %}
-        {% if group.social %}
+        {% if event.social %}
             Social
         {% endif %}
-        {% if group.energy %}
+        {% if event.energy %}
             Energy
         {% endif %}
-        {% if group.activism %}
+        {% if event.activism %}
             Activism
         {% endif %}
-        {% if group.environment %}
+        {% if event.environment %}
             Environment
         {% endif %}
-        {% if group.projects %}
+        {% if event.projects %}
             Projects
         {% endif %}
-        {% if group.arts %}
+        {% if event.arts %}
             Arts
         {% endif %}
-        {% if group.education %}
+        {% if event.education %}
             Education
         {% endif %}
-        {% if group.policy %}
+        {% if event.policy %}
             Policy
         {% endif %}
-        {% if group.wellness %}
+        {% if event.wellness %}
             Wellness
         {% endif %}
       </p>
