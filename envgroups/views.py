@@ -5,6 +5,9 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 # Create your views here.
+def search_by_category(model_type, category):
+    pass
+
 def index(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -28,7 +31,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'envgroups/logout.html')
+    return render(request, 'envgroups/index.html')
 
 def signup_view(request):
     return render(request, 'envgroups/signup.html')
@@ -52,65 +55,57 @@ def signup_complete(request):
 def about(request):
     return render(request, 'envgroups/about.html')
 
-def groups(request):
-    GROUPS = Group.objects.order_by('title')
+def groups(request, group_id=''):
+#    GROUPS = Group.objects.order_by('title')
     context = {}
-    if request.method == 'POST':
-        gtype = request.POST.get('group-type')
-        category = request.POST.get('group-category')
-        search_term = request.POST.get('search_term')
-        if gtype != "":
-            GROUPS = Group.objects.filter(gtype = gtype)
-        cat_dic = {'FO':'food',
-                   'SO':'social',
-                   'EN':'energy',
-                   'AC':'activism',
-                   'EV':'environment',
-                   'PR':'projects',
-                   'AR':'arts',
-                   'ED':'education',
-                   'PO':'policy' }
-        if category != "":
-            new_groups = []
-            for G in GROUPS:
-                if getattr(G, cat_dic[category]):
-                    new_groups.append(G)
-            GROUPS = new_groups
-        if search_term != "":
-            new_groups = []
-            for G in GROUPS:
-                st = search_term.lower()
-                t = G.title.lower()
-                m = G.mission.lower()
-                if st in t or st in m:
-                    new_groups.append(G)
-            GROUPS = new_groups
-    if request.method == 'GET' and 'group_id' in request.GET:
-        present = datetime.now()
-        context['getTrue'] = True
-        gid = request.GET.get('group_id')
-        GROUPS = Group.objects.filter(id=gid)
-        EVENTS = Event.objects.filter(group=GROUPS[0].title).filter(time__gte=present).order_by('time')
-        GROUPPOSTINGS = GroupPosting.objects.filter(groupid=int(gid))
-        COMMENTS = []
-        for gp in GROUPPOSTINGS:
-            COMMENTS = Comment.objects.filter(parentid = gp.id)
-        context['grouppostings'] = GROUPPOSTINGS
-        context['comments'] = COMMENTS 
-        context['group_id'] = gid
-        context['events'] = EVENTS
+    GROUPS = Group.objects.order_by('title')
+    cat_dic = {'':'',
+               'FO':'food',
+               'SO':'social',
+               'EN':'energy',
+               'AC':'activism',
+               'EV':'environment',
+               'PR':'projects',
+               'AR':'arts',
+               'ED':'education',
+               'PO':'policy' }
+    context['cat_dic'] = cat_dic
+    context['detail'] = False
+    if group_id == '':
+        if request.method == 'POST':
+            gtype = request.POST.get('group-type')
+            cat = request.POST.get('group-category')
+            category = cat_dic[cat]
+            search_term = request.POST.get('search_term')
+            if gtype != '':
+                GROUPS = Group.objects.filter(gtype=gtype)
+            if category != '':
+                new_groups = []
+                for G in GROUPS:
+                    if category in G.categories():
+                        new_groups.append(G)
+                GROUPS = new_groups
+            if search_term != '':
+                new_groups = []
+                for G in GROUPS:
+                    if search_term.lower() in G.searchblob():
+                        new_groups.append(G)
+                GROUPS = new_groups
     else:
-        context['getTrue'] = False
-    if request.method == 'POST': 
-        if request.POST['top_level'] == "True":
-            groupid = request.POST['group_id']
-            username = request.POST['username']
-            title = request.POST['title']
-            content = request.POST['content']
-            time = datetime.now()
-            gp = GroupPosting(groupid=groupid, username=username, title=title, content=content, time=time)
-            gp.save()
-    context['groups'] = GROUPS 
+        context['detail'] = True
+        GROUPS = Group.objects.filter(id=group_id)
+        GROUP_POSTINGS = GroupPosting.objects.filter(groupid=int(group_id))
+        context['grouppostings'] = GROUP_POSTINGS
+        if request.method == 'POST': 
+            if request.POST['top_level'] == "True":
+                groupid = request.POST['group_id']
+                username = request.POST['username']
+                title = request.POST['title']
+                content = request.POST['content']
+                time = datetime.now()
+                gp = GroupPosting(groupid=groupid, username=username, title=title, content=content, time=time)
+                gp.save()
+    context['groups'] = GROUPS
     return render(request, 'envgroups/groups.html', context)
 
 def events(request, event_id=''):

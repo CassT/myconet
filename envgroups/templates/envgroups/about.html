@@ -1,35 +1,67 @@
 {% extends 'envgroups/main.html' %}
-
-{% block main %}
-<div id="about-content">
-<div class="about-person">
-<img class="person-photo" src="/static/envgroups/img/eli.jpg">
-<h1 class="about-header">Eliot Kersgaard</h1><p>Eliot is a Biomimicry leader, educator, and consultant with experience in permaculture, empathy and systems thinking design philosophies, and local networking. His passion is promoting collaboration between problem solvers to build a sustainable future.</p>
-</div>
-
-<div class="about-person">
-<img class="person-photo" src="/static/envgroups/img/ele.jpg">
-<h1 class="about-header">Elana Hansen</h1><p>With an eye for design, Elena communicates our mission in a variety of mediums for marketing and successful group representation. She is passionate about the role of design and knowledge of materials and how we construct our environment can be leveraged to help the environment.</p>
-</div>
-
-<div class="about-person">
-<img class="person-photo" src="/static/envgroups/img/bra.jpg">
-<h1 class="about-header">Braeden Miguel</h1><p>As an entrepreneurial innovator at heart with experience in design thinking, business, and sustainability, Braeden creates tangible deliverables to reach our goals. He uses his startup experience to develop our business and maximize his positive world impact.</p>
-</div>
-
-<div class="about-person">
-<img class="person-photo" src="/static/envgroups/img/dom.jpg">
-<h1 class="about-header">Dominic Fraser</h1><p>Dominic’s interest in interpersonal relationships and study of social dynamics helps create the collaborative environment to connect stakeholders. His passion is to help fix the societal-induced mental health problems through holistic living.</p>
-</div>
-
-<div class="about-person">
-<img class="person-photo" src="/static/envgroups/img/ted.jpg">
-<h1 class="about-header">Ted Thayer</h1><p>Ted creates long term strategy for executing and maintaining MyCoNet to maximize value for stakeholders. His passion is working on interdisciplinary projects to generate positive world impact and create transformative technologies.</p>
-</div>
-
-<div class="about-person">
-<img class="person-photo" src="/static/envgroups/img/cass.jpg">
-<h1 class="about-header">Cassidy Thompson</h1><p>As an expert web designer, Cassidy creates and evolves the back-end functionality that facilitates our innovative platform. His passion is using modern technology to create platforms for improving collaboration and integration of science and society.</p>
-</div>
-</div>
+{% block content %}
+{% load staticfiles %}
+        <div style="margin-top:50px"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>About Us</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam commodo tincidunt nisi nec eleifend. Aliquam nec libero vulputate, ultrices est et, lacinia arcu. Praesent vel iaculis dolor. Nullam sapien sem, varius id tortor at, laoreet vestibulum urna. Nulla vulputate sem est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod sem vitae risus hendrerit mollis. Quisque leo orci, feugiat in volutpat vitae, commodo ut ipsum. Donec consequat metus fermentum mauris dictum aliquam. Maecenas et massa rhoncus, suscipit libero eget, vulputate ex. Ut sed sem lectus.</p>
+            </div>
+        </div>
+        <br>
+        <div style="border-top: 1px solid #848B96"></div>
+        <br>
+        <br>
+        <div class="row">
+            <!--Eliot Kersgaard-->
+            <div class="col-xs-12 col-md-4">
+                <p class="text-center"><img src="{% static 'envgroups/img/eliot.jpg' %}" alt="Eliot" height="150px"/></p>
+                <h3 class="text-center">Eliot Kersgaard</h3>
+                <p>Eliot is a Biomimicry leader, educator, and consultant with experience in permaculture, empathy and systems thinking design philosophies, and local networking. His passion is promoting collaboration between problem solvers to build a sustainable future.</p>
+                <br>
+            </div>
+            <!--Elana Hansen-->
+            <div class="col-xs-12 col-md-4">
+                <p class="text-center"><img src="{% static 'envgroups/img/elana.jpg' %}" alt="Eliot" height="150px"/></p>
+                <h3 class="text-center">Elana Hansen</h3>
+                <p>With an eye for design, Elena communicates our mission in a variety of mediums for marketing and successful group representation. She is passionate about the role of design and knowledge of materials and how we construct our environment can be leveraged to help the environment.</p>
+                <br>
+            </div>
+            <!--Braeden Miguel-->
+            <div class="col-xs-12 col-md-4">
+                <p class="text-center"><img src="{% static 'envgroups/img/braeden.jpg' %}" alt="Eliot" height="150px"/></p>
+                <h3 class="text-center">Braeden Miguel</h3>
+                <p>As an entrepreneurial innovator at heart with experience in design thinking, business, and sustainability, Braeden creates tangible deliverables to reach our goals. He uses his startup experience to develop our business and maximize his positive world impact.</p>
+                <br>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!--Dominic Fraser-->
+            <div class="col-xs-12 col-md-4">
+                <p class="text-center"><img src="{% static 'envgroups/img/dominic.jpg' %}" alt="Eliot" height="150px"/></p>
+                <h3 class="text-center">Dominic Fraser</h3>
+                <p>Dominic’s interest in interpersonal relationships and study of social dynamics helps create the collaborative environment to connect stakeholders. His passion is to help fix the societal-induced mental health problems through holistic living.</p>
+                <br>
+            </div>
+            <!--Ted Thayer-->
+            <div class="col-xs-12 col-md-4">
+                <p class="text-center"><img src="{% static 'envgroups/img/ted.jpg' %}" alt="Ted Thayer" height="150px"/></p>
+                <h3 class="text-center">Ted Thayer</h3>
+                <p>Ted creates long term strategy for executing and maintaining MyCoNet to maximize value for stakeholders. His passion is working on interdisciplinary projects to generate positive world impact and create transformative technologies.</p>
+                <br>
+            </div>
+            <!--Cassidy Thompson-->
+            <div class="col-xs-12 col-md-4">
+                <p class="text-center"><img src="{% static 'envgroups/img/cassidy.jpg' %}" alt="Cassidy Thompson" height="150px"/></p>
+                <h3 class="text-center">Cassidy Thompson</h3>
+                <p>As an expert web designer, Cassidy creates and evolves the back-end functionality that facilitates our innovative platform. His passion is using modern technology to create platforms for improving collaboration and integration of science and society.</p>
+            </div>
+        </div>
+    </div><!--end container-->
 {% endblock %}
+

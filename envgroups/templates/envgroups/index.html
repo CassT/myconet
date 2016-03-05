@@ -1,12 +1,42 @@
 {% extends 'envgroups/main.html' %}
-{% block main %}
-<!-- <div id="home-container-main"> -->
-  <div id="home-main">
-    <div id="home-link-container">
-      <a class="home-link" href="/groups">Groups</a>
-      <a class="home-link" href="/events">Events</a>
-    <!--  <a class="home-link" href="/resources">Resources</a> -->
+{% block content %}
+{% load staticfiles %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <img src="{% static 'envgroups/img/banner.jpg' %}" style="margin-top: 50px; width: 104%;"/>
+        </div>
     </div>
-  </div>
-<!-- </div> -->
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>The Place for Finding Evironmental Groups</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam commodo tincidunt nisi nec eleifend. Aliquam nec libero vulputate, ultrices est et, lacinia arcu. Praesent vel iaculis dolor. Nullam sapien sem, varius id tortor at, laoreet vestibulum urna. Nulla vulputate sem est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod sem vitae risus hendrerit mollis. Quisque leo orci, feugiat in volutpat vitae, commodo ut ipsum. Donec consequat metus fermentum mauris dictum aliquam. Maecenas et massa rhoncus, suscipit libero eget, vulputate ex. Ut sed sem lectus.</p>    
+        </div>
+    </div>
+    <br>
+        <div style="border-top: 1px solid #848B96"></div>
+    <br>
+    <!--start three columns-->
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <h2 class="text-center">Groups</h2>
+            <p>Nulla egestas consectetur malesuada. Pellentesque volutpat aliquam augue. Suspendisse potenti. Nunc lacinia efficitur risus, sit amet blandit ante. Aenean ut quam tortor. Integer lacus sem, accumsan nec vestibulum nec, laoreet vel eros. Etiam pretium aliquam erat id placerat.</p>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h2 class="text-center">Events</h2>
+            <p>Nulla egestas consectetur malesuada. Pellentesque volutpat aliquam augue. Suspendisse potenti. Nunc lacinia efficitur risus, sit amet blandit ante. Aenean ut quam tortor. Integer lacus sem, accumsan nec vestibulum nec, laoreet vel eros. Etiam pretium aliquam erat id placerat.</p>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h2 class="text-center">Projects</h2>
+            <p>Nulla egestas consectetur malesuada. Pellentesque volutpat aliquam augue. Suspendisse potenti. Nunc lacinia efficitur risus, sit amet blandit ante. Aenean ut quam tortor. Integer lacus sem, accumsan nec vestibulum nec, laoreet vel eros. Etiam pretium aliquam erat id placerat.</p>
+        </div>
+    </div><!--end row-->
+</div><!--end container-->
 {% endblock %}

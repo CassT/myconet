@@ -1,9 +1,22 @@
 {% extends 'envgroups/main.html' %}
-{% block main %}
-<form id="login_form" method="POST" action="/">
-    {% csrf_token %}
-    <span class="form_label">Username:</span> <input type="text" name="username"><br>
-    <span class="form_label">Password:</span> <input type="password" name="password"><br>
-    <input type="submit" value="Login">
-</form>
+{% block content %}
+    <div class="container">
+        <div style="margin-top:100px"></div>
+        <div class="row">
+            <div class="col-xs-4"></div>
+                <div class="col-xs-4">
+                    <div class="thumbnail">
+                        <div class="caption text-center">
+                            <form id="login_form" method="POST" action="/">
+                                {% csrf_token %}
+                                <span class="form_label">Username:</span> <input type="text" name="username"><br><br>
+                                <span class="form_label">Password:</span> <input type="password" name="password"><br><br>
+                                <input type="submit" value="Login">
+                            </form>
+                    	</div>
+                    </div>
+                </div>
+            <div class="col-xs-4"></div>
+        </div>
+    </div><!--end container-->
 {% endblock %}

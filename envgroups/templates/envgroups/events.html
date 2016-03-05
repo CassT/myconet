@@ -1,55 +1,44 @@
 {% extends 'envgroups/main.html' %}
-{% block main %}
-    <div class="search-bar">
-        <form method="POST" action="/events/"> {% csrf_token %}
-            <div id="searchbar">
-                Search:<input type="text" name="search_term">
-                <input type="submit" value="Search">
-            </div>
-        </form> 
+{% block content %}
+<div style="margin-top:50px"></div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Events</h1>
     </div>
-    {% for event in events %}
-      <div class="group-container">
-        <a href=/events?event_id={{ event.id }}>
-            {{ event.name }}
-        </a>
-        <p>Group: {{ event.group }}</p>
-        <p>Time: {{ event.time }}</p>
-        <p>Location: {{ event.location }}</p>
-        <p>Description: {{ event.description }}</p>
-        <p>Link: <a href="{{event.link}}">{{event.link}}</a></p>
-        <p>Category:
-        {% if event.food %}
-            Food
-        {% endif %}
-        {% if event.social %}
-            Social
-        {% endif %}
-        {% if event.energy %}
-            Energy
-        {% endif %}
-        {% if event.activism %}
-            Activism
-        {% endif %}
-        {% if event.environment %}
-            Environment
-        {% endif %}
-        {% if event.projects %}
-            Projects
-        {% endif %}
-        {% if event.arts %}
-            Arts
-        {% endif %}
-        {% if event.education %}
-            Education
-        {% endif %}
-        {% if event.policy %}
-            Policy
-        {% endif %}
-        {% if event.wellness %}
-            Wellness
-        {% endif %}
-      </p>
-      </div>
-    {% endfor %}
+</div>
+<div class="row">
+    <div class="col-xs-12">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam commodo tincidunt nisi nec eleifend. Aliquam nec libero vulputate, ultrices est et, lacinia arcu. Praesent vel iaculis dolor. Nullam sapien sem, varius id tortor at, laoreet vestibulum urna. Nulla vulputate sem est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod sem vitae risus hendrerit mollis. Quisque leo orci, feugiat in volutpat vitae, commodo ut ipsum. Donec consequat metus fermentum mauris dictum aliquam. Maecenas et massa rhoncus, suscipit libero eget, vulputate ex. Ut sed sem lectus.</p>
+    </div>
+</div>
+<br>
+<div style="border-top: 1px solid #848B96"></div>
+<br>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <form method="POST" action="/events/" class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input name="search_term" type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</nav>
+{% for event in events %}
+<div class="row">
+    <div class="col-xs-12">
+        <h3><a href="/events?event_id={{ event.id }}">{{ event.name }}</a></h3>
+        <p><b>Group: </b>{{ event.group }}</p>
+        <p><b>Time: </b>{{ event.time }}</p>
+        <p><b>Location: </b>{{ event.location }}</p>
+        <p><b>Description: </b>{{ event.description }}</p>
+        <p><b>Website: </b><a href="{{ event.link }}">{{ event.link }}</a></p>
+        <p><b>Category: </b>
+            {% for cat in event.categories %}
+                <span>{{ cat }} </span>
+            {% endfor %}
+        </p>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}

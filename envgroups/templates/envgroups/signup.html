@@ -1,5 +1,29 @@
 {% extends 'envgroups/main.html' %}
-{% block main %}
+{% block content %}
+    <div class="container">
+        <div style="margin-top:100px"></div>
+        <div class="row">
+            <div class="col-xs-4"></div>
+                <div class="col-xs-4">
+                    <div class="thumbnail">
+                        <div class="caption text-center">
+                            <form id="login_form" method="POST" action="/signup_complete/">
+                                {% csrf_token %}
+                                <span class="form_label">Username:</span><input type="text" name="username"><br><br>
+                                <span class="form_label">Password:</span><input type="password" name="password"><br><br>
+                                <span class="form_label">Password (Again):</span><input type="password" name="password_repeat"><br><br>
+                                <span class="form_label">First Name:</span><input type="text" name="first_name"><br><br>
+                                <span class="form_label">Last Name:</span><input type="text" name="last_name"><br><br>
+                                <span class="form_label">Email Address:</span><input type="text" name="email"><br><br>
+                                <input type="submit" value="Sign Up">
+                            </form>
+                    	</div>
+                    </div>
+                </div>
+            <div class="col-xs-4"></div>
+        </div>
+    </div><!--end container-->
+{% comment %}
 <form method="POST" action="/signup_complete/">
     {% csrf_token %}
     <span class="form_label">Username:</span><input type="text" name="username"><br>
@@ -10,4 +34,5 @@
     <span class="form_label">Email Address:</span><input type="text" name="email"><br>
     <input type="submit" value="Sign Up">
 </form>
+{% endcomment %}
 {% endblock %}

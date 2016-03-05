@@ -1,0 +1,156 @@
+/* Main template CSS */
+#navbar {
+    width:100%;
+    height:80px;
+    background-color:#001a00;
+}
+
+body {
+    background-color:black;
+}
+
+#earth-icon {
+    width:80px;
+    height:80px;
+    float:left;
+}
+
+.banner-link {
+    display:block;
+    height:80px;
+    line-height:80px;
+    width:140px;
+    clear:none;
+    float:left;
+    text-align:center;
+    vertical-align:middle;
+    text-decoration:none;
+    color:#ff9900;
+}
+
+.banner-link:hover {
+    background-color:#ff9900;
+    color:black;
+}
+
+#login-link {
+    float:right;
+}
+
+.form_label {
+    color:white;
+}
+
+#signup-link {
+    float:right;
+}
+
+#events-footer {
+    background-color:#001a00;
+    width:100%;
+    height:80px;
+    text-align:center;
+    vertical-align:middle;
+    line-height:80px;
+}
+
+#events-footer a {
+    color:#ff9900;
+    text-decoration:none;
+}
+
+/* Index template */
+/*#home-container-main {
+    width:100%;
+    height:750px;
+    background-color:transparent;
+}*/
+
+#home-main {
+    background-image: url(/static/envgroups/img/earth.jpg)  ;
+    background-position:center bottom;
+    background-size:contain;
+    background-repeat: no-repeat;
+    /*float:center;
+    width:750px;*/
+    width:100%;
+    height:750px;
+}
+
+.home-link {
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    font-size:80px;
+    height:80px;
+    vertical-align:middle;
+    line-height:80px;
+    display:block;
+    clear:both;
+    margin-top:40px;
+    margin-bottom:40px;
+    font-family:Sans-serif;
+}
+
+#home-link-container {
+    padding-top:0px;
+}
+
+/*groups page*/
+.search-bar {
+    width:100%;
+    height:60px;
+    line-height:60px;
+    vertical-align:middle;
+    background-color:#3399ff;
+    padding:0px;
+}
+
+#searchbar {
+    float:left;
+    margin-left:20px;
+}
+
+#dropdown {
+    float:right;
+    margin-right:20px;
+}
+
+.group-container {
+    background-color:#ffffcc;
+    width:100%;
+    border-radius:25px;
+    border: 2px solid #4d4d4d;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.group-container p {
+    padding-left: 25px;
+}
+
+.group-container a {
+    padding-left:25px;
+    /*text-decoration:none;*/
+    color:#001a00;
+}
+
+.group-container a:hover {
+    color:#ff9900;
+}
+
+#about-content {
+    text-align: center;
+    max-width: 50%;
+    margin: 0 auto;
+    background-color:white;
+}
+
+#logout-text {
+    color:white;
+}
+
+.comment_block {
+    background-color:#99ff66;
+}
+

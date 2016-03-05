@@ -3,17 +3,17 @@ from django.db import models
 # Environmental Groups and Events
 class Group(models.Model):
     # Need to add picture upload somewhere
-    CATEGORIES = (
-        ('FO','Food'),
-        ('SO','Social'),
-        ('EN','Energy'),
-        ('AC','Activism'),
-        ('EV','Environment'),
-        ('PR','Projects'),
-        ('AR','Arts'),
-        ('ED','Education'),
-        ('PO','Policy'), 
-    )
+    #CATEGORIES = (
+    #    ('FO','Food'),
+    #    ('SO','Social'),
+    #    ('EN','Energy'),
+    #    ('AC','Activism'),
+    #    ('EV','Environment'),
+    #    ('PR','Projects'),
+    #    ('AR','Arts'),
+    #    ('ED','Education'),
+    #    ('PO','Policy'), 
+    #)
     BINARY_CHOICE = (
         ('Y','Yes'),
         ('N','No'),
@@ -23,7 +23,8 @@ class Group(models.Model):
         ('FP','For Profit'),
         ('NP','Non Profit'),
     )
-#    category    = models.CharField(max_length=2, choices=CATEGORIES)
+    CATEGORIES = ['food', 'social', 'energy', 'activism', 'environment',
+                  'projects', 'arts', 'education', 'policy', 'wellness']
     food        = models.BooleanField(default=False)
     social      = models.BooleanField(default=False)
     energy      = models.BooleanField(default=False)
@@ -44,10 +45,23 @@ class Group(models.Model):
     gtype       = models.CharField(max_length=2, choices=TYPES)
     link        = models.CharField(max_length=300)
     connections = models.TextField()
+    def categories(self):
+        cat_list = self.CATEGORIES
+        g_cat_list = []
+        for cat in cat_list:
+            if getattr(self, cat):
+                g_cat_list.append(cat)
+        return g_cat_list
+    def searchblob(self):
+        blob = "%s%s" % (self.title, self.mission)
+        lowercaseblob = blob.lower()
+        return lowercaseblob
     def __unicode__(self):
         return self.title
 
 class Event(models.Model):
+    CATEGORIES = ['food', 'social', 'energy', 'activism', 'environment',
+                  'projects', 'arts', 'education', 'policy', 'wellness']
     group       = models.CharField(max_length=200)
     name        = models.CharField(max_length=200)
     time        = models.DateTimeField()
@@ -64,6 +78,13 @@ class Event(models.Model):
     education   = models.BooleanField(default=False)
     policy      = models.BooleanField(default=False)
     wellness    = models.BooleanField(default=False)
+    def categories(self):
+        cat_list = self.CATEGORIES
+        g_cat_list = []
+        for cat in cat_list:
+            if getattr(self, cat):
+                g_cat_list.append(cat)
+        return g_cat_list
     def __unicode__(self):
         s = self.time.strftime('%Y-%m-%d %H:%M ') + self.name
         return s

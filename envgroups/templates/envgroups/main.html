@@ -1,33 +1,60 @@
 <html>
-  <head>
-      {% block title %}
-         <title>MyCoNet</title>
-      {% endblock %}
-      {% load staticfiles %}
-      <link href="{% static 'envgroups/css/envgroups.css' %}" rel="stylesheet" type="text/css">
-      <link href="{% static 'envgroups/img/small-earth.png' %}" rel="icon" type="image/png">
-      {% block additional_headers %} {% endblock %}
-  </head>
-  <body>
-      <!--Default Navigation Bar-->
-      <img style="width:100%;" src="{% static 'envgroups/img/banner.jpg' %}">
-      <div id="navbar">
-          <img src="{% static 'envgroups/img/small-earth.png' %}" id="earth-icon">
-          <a href="/" class="banner-link">Home</a>
-          <a href="/about" class="banner-link">About</a>
-          <a href="/groups" class="banner-link">Groups</a>
-          <a href="/events" class="banner-link">Events</a>
-          {% if user.is_authenticated %}
-              <a href="/logout" class="banner-link" id="login-link">Logout</a>
-          {% else %}
-              <a href="/signup/" class="banner-link" id="signup-link">Sign Up</a>
-              <a href="/login/" class="banner-link" id="login-link">Login</a>
-          {% endif %} 
-      </div>
-      {% block main %}
-      {% endblock %}
-      <div id="events-footer">
-          <a href="">Upcoming Event: MyCoNet Launch Party</a>
-      </div>
-  <body>
+<head>
+    <title>MyCoNet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    {% load staticfiles %}
+    <link href="{% static 'envgroups/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'envgroups/css/custom.css' %}" rel="stylesheet">
+    <script src="{% static 'envgroups/js/respond.js' %}"></script>
+    {% block additional_headers %}{% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        <!--navigation bar-->
+        <div class="row">
+            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"><a href="/about/">About</a></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">MyCoNet</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/about/">About</a></li>
+                            <li><a href="/groups/">Groups</a></li>
+                            <li><a href="/events/">Events</a></li>
+                            <li><a href="/projects/">Projects</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if user.is_authenticated %}
+                                <li><a href="/logout/">Logout</a></li>
+                            {% else %}
+                                <li><a href="/login/">Login</a></li>
+                                <li><a href="/signup/">Sign Up</a></li>
+                            {% endif %}
+                        </ul>
+                    </div><!--end navbar-collapse-->
+                </div>
+            </nav>
+        </div><!--end row-->
+    </div><!--end container-->
+
+    {% block content %}
+    {% endblock %}
+
+    <!--footer-->
+    <footer class="row">
+        <p>&copy; MyCoNet</p>
+    </footer>
+
+</body>
 </html>
