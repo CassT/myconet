@@ -1,0 +1,13 @@
+{% extends 'envgroups/main.html' %}
+{% block main %}
+<form method="POST" action="/signup_complete/">
+    {% csrf_token %}
+    <span class="form_label">Username:</span><input type="text" name="username"><br>
+    <span class="form_label">Password:</span><input type="password" name="password"><br>
+    <span class="form_label">Password (Again):</span><input type="password" name="password_repeat"><br>
+    <span class="form_label">First Name:</span><input type="text" name="first_name"><br>
+    <span class="form_label">Last Name:</span><input type="text" name="last_name"><br>
+    <span class="form_label">Email Address:</span><input type="text" name="email"><br>
+    <input type="submit" value="Sign Up">
+</form>
+{% endblock %}

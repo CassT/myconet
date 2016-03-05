@@ -67,3 +67,25 @@ class Event(models.Model):
     def __unicode__(self):
         s = self.time.strftime('%Y-%m-%d %H:%M ') + self.name
         return s
+
+## Forum content
+class GroupPosting(models.Model):
+    groupid  = models.IntegerField()
+    title    = models.CharField(max_length=300)
+    content  = models.TextField()
+    time     = models.DateTimeField()
+    username = models.CharField(max_length=200)
+    def __unicode__(self):
+        s = self.title
+        return s
+
+class Comment(models.Model):
+    top_level = models.BooleanField()
+    parentid  = models.IntegerField() ##Posting if top_level, comment otherwise
+    content   = models.TextField()
+    time      = models.DateTimeField()
+    username   = models.CharField(max_length=200)
+    def __unicode__(self):
+        s = self.content
+        return s
+

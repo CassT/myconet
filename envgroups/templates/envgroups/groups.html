@@ -83,8 +83,52 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
+{% comment %}
+            {% if user.is_authenticated %}
+                <form action="./" method="POST">
+                    {% csrf_token %}
+                    <p>Submit a post</p>
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    Title:<input type="text" name="title"><br>
+                    Content:<input type="text" name="content"><br>
+                </form>
+            {% endif %}
+{% endcomment %}
+{% comment %}
+            {% if grouppostings %}
+                {% for posting in grouppostings %}
+                    <div>
+                        <p class="posting_title">{{ posting.title }}</p>
+                        <p class="posting_content">{{ posting.content }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+{% endcomment %}
         {% endif %}
       </div>
+            {% if user.is_authenticated and getTrue %}
+                <div class="coment_form_block">
+                    <form action="./" method="POST">
+                        {% csrf_token %}
+                        <p class="form_label">Submit a post</p>
+                        <input type="hidden" name="top_level" value="True">
+                        <input type="hidden" name="group_id" value="{{ group.id }}">
+                        <input type="hidden" name="username" value="{{ user.username }}">
+                        <p class="form_label">Title:</p><input type="text" name="title"><br>
+                        <p class="form_label">Content:</p><textarea name="content" rows="15" cols="150"></textarea><br>
+                        <input type="submit" value="Post Comment">
+                    </form>
+                 </div>
+            {% endif %}
+            {% if getTrue %}
+                {% for g in grouppostings %}
+                    <div class="comment_block">
+                        <p>{{ g.title }} by {{ g.username }} on {{ g.time }}</p>
+                        <p>{{ g.content }}<p>
+                    </div>
+                {% endfor %}
+            {% endif %}
     {% endfor %}
 
 {% endblock %}

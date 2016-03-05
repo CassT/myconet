@@ -20,7 +20,8 @@
           {% if user.is_authenticated %}
               <a href="/logout" class="banner-link" id="login-link">Logout</a>
           {% else %}
-              <a href="/login" class="banner-link" id="login-link">Login</a>
+              <a href="/signup/" class="banner-link" id="signup-link">Sign Up</a>
+              <a href="/login/" class="banner-link" id="login-link">Login</a>
           {% endif %} 
       </div>
       {% block main %}

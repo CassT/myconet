@@ -1,0 +1,9 @@
+{% extends 'envgroups/main.html' %}
+{% block main %}
+<form id="login_form" method="POST" action="/">
+    {% csrf_token %}
+    <span class="form_label">Username:</span> <input type="text" name="username"><br>
+    <span class="form_label">Password:</span> <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+</form>
+{% endblock %}

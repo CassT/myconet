@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
-from models import Group, Event
+from django.contrib.auth import authenticate, login, logout
+from models import Group, Event, GroupPosting, Comment
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -21,6 +22,32 @@ def index(request):
             # redirect to invalid login page
             return render(request, 'envgroups/index.html')
     return render(request, 'envgroups/index.html')
+
+def login_view(request):
+    return render(request, 'envgroups/login.html')
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'envgroups/logout.html')
+
+def signup_view(request):
+    return render(request, 'envgroups/signup.html')
+
+def signup_complete(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    password_repeat = request.POST['password_repeat']
+    first_name = request.POST['first_name']
+    last_name = request.POST['last_name']
+    email = request.POST['email']
+    if password != password_repeat:
+        return render(request, 'envgroups/password_doesnt_match.html')
+    else:
+        user = User.objects.create_user(username=username, password=password, email=email, first_name = first_name, last_name=last_name)
+        user.save()
+        user_auth = authenticate(username=username, password=password)
+        login(request, user_auth)
+        return render(request, 'envgroups/user_created.html')
 
 def about(request):
     return render(request, 'envgroups/about.html')
@@ -64,10 +91,25 @@ def groups(request):
         gid = request.GET.get('group_id')
         GROUPS = Group.objects.filter(id=gid)
         EVENTS = Event.objects.filter(group=GROUPS[0].title).filter(time__gte=present).order_by('time')
+        GROUPPOSTINGS = GroupPosting.objects.filter(groupid=int(gid))
+        COMMENTS = []
+        for gp in GROUPPOSTINGS:
+            COMMENTS = Comment.objects.filter(parentid = gp.id)
+        context['grouppostings'] = GROUPPOSTINGS
+        context['comments'] = COMMENTS 
         context['group_id'] = gid
         context['events'] = EVENTS
     else:
-        context['getTrue'] = False 
+        context['getTrue'] = False
+    if request.method == 'POST': 
+        if request.POST['top_level'] == "True":
+            groupid = request.POST['group_id']
+            username = request.POST['username']
+            title = request.POST['title']
+            content = request.POST['content']
+            time = datetime.now()
+            gp = GroupPosting(groupid=groupid, username=username, title=title, content=content, time=time)
+            gp.save()
     context['groups'] = GROUPS 
     return render(request, 'envgroups/groups.html', context)
 
