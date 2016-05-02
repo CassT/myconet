@@ -1,0 +1,30 @@
+{% extends 'envgroups/main.html' %}
+{% block content %}
+        <div style="margin-top:50px"></div>
+<form id="create_profile_form" action="/profile_created/" method="POST">
+    {% csrf_token %}
+    Tagline:<br><input type="text" name="tagline"><br>
+    Location:<br><input type="text" name="location"><br>
+    Interests:<br>
+        {% for category in cats %}
+            <input type="checkbox" name="interests[]" value="{{ category }}">{{ category }}<br>
+        {% endfor %}
+    <br>
+    Other Interests:<input type="text" name="other_interests"><br>
+    Skills:<br>
+        {% for skill in skis %}
+            <input type="checkbox" name="skills[]" value="{{ skill }}">{{ skill }}<br>
+        {% endfor %}
+    <br>
+    Resources:<br>
+        {% for resource in ress %}
+            <input type="checkbox" name="resources[]" value="{{ resource }}">{{ resource }}<br>
+        {% endfor %}
+    <br>
+    What do you want to do?<br><textarea name="wdywtd" rows="4" cols="150"></textarea><br>
+    What are your most significant needs?<br><textarea name="needs" rows="4" cols="150"></textarea><br>
+    What are your most significant offerings:<br><textarea name="offerings" rows="4" cols="150"></textarea><br>
+    Describe your ideal collaboration:<br><textarea name="ideal_collaboration" rows="4" cols="150"></textarea><br>
+    <input type="submit" value="submit">
+</form>
+{% endblock %}

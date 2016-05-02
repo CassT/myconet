@@ -1,6 +1,7 @@
 {% extends 'envgroups/main.html' %}
 {% block content %}
 <div style="margin-top:50px"></div>
+<div class="container-fluid">
 <div class="row">
     <div class="col-xs-12">
         <h1>Groups</h1>
@@ -8,8 +9,7 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam commodo tincidunt nisi nec eleifend. Aliquam nec libero vulputate, ultrices est et, lacinia arcu. Praesent vel iaculis dolor. Nullam sapien sem, varius id tortor at, laoreet vestibulum urna. Nulla vulputate sem est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod sem vitae risus hendrerit mollis. Quisque leo orci, feugiat in volutpat vitae, commodo ut ipsum. Donec consequat metus fermentum mauris dictum aliquam. Maecenas et massa rhoncus, suscipit libero eget, vulputate ex. Ut sed sem lectus.</p>
-    </div>
+<p>Welcome to our ever-growing list of {{group.count}} progressive groups in Boulder! Know any groups that should be listed but arn't?<a href="http://goo.gl/forms/C6fp7VzAwN"> Click Here to add a group!</a></div>
 </div>
 <br>
 <div style="border-top: 1px solid #848B96"></div>
@@ -23,9 +23,11 @@
                 <div id="dropdown">
                     Type: <select name="group-type">
                         <option value="">Any</option>
-                        <option value="SG">Student Group</option>
-                        <option value="FP">For Profit</option>
+                        <option value="SG">Academic</option>
+                        <option value="FP">Business</option>
                         <option value="NP">Non Profit</option>
+                        <option value="GV">Government</option>
+                        <option value="UC">Unclassified</option>
                     </select>
                     &nbsp;
                     Categories:<select name='group-category'>
@@ -39,6 +41,9 @@
                         <option value="AR">Arts</option>
                         <option value="ED">Education</option>
                         <option value="PO">Policy</option>
+                        <option value="HO">Housing</option>
+                        <option value="WE">Wellness</option>
+                        <option value="RE">Research</option>
                     </select>
                 </div>
             </div>
@@ -46,11 +51,10 @@
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search" name="search_term">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Search</button>
         </form>
     </div>
 </nav>
-
 {% for group in groups %}
     <div class="row">
         <div class="col-xs-12">
@@ -67,7 +71,10 @@
                 <p>Products: {{ group.products }}</p>
                 <p>Hiring: {{ group.hiring }}</p>
                 <p>{{ group.hiring_text }}</p>
+                <p>Type: {{ group.group_type_label }}</p>
+{% comment %}
                 <p>Type: {{ group.gtype }}</p>
+{% endcomment %}
                 <p>Link: <a href="{{ group.link }}">{{group.link}}</a></p>
                 <p>Connections: {{ group.connections }}</p>
                 {% if events %}
@@ -83,10 +90,11 @@
                     </ul>
                 {% endif %}
                 {% if user.is_authenticated %}
+                    <div style="border-top: 1px solid #848B96"></div>
                     <div class="coment_form_block">
                         <form action="./" method="POST">
                             {% csrf_token %}
-                            <p class="form_label">Submit a post</p>
+                            <p class="form_label"><b>Submit a post</b></p>
                             <input type="hidden" name="top_level" value="True">
                             <input type="hidden" name="group_id" value="{{ group.id }}">
                             <input type="hidden" name="username" value="{{ user.username }}">
@@ -112,4 +120,5 @@
         </div>
     </div>
 {% endfor %}
+</div>
 {% endblock %}

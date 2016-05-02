@@ -1,0 +1,48 @@
+{% extends 'envgroups/main.html' %}
+{% block content %}
+<div class="container">
+{% if profile %}
+    <h1>{{ profile.fullname }}</h1>
+    <b>Tagline: </b>{{ profile.tagline }}<br><br>
+    <b>Location: </b>{{ profile.location }}<br><br>
+    <b>Interests: <b><br>
+    <ul>
+        {% for cat in profile.categories %}
+            <li>{{ cat }}</li>
+        {% endfor %}
+        {% if profile.other_interests %}
+            <li>{{ profile.other_interests }}</li>
+        {% endif %}
+    </ul><br>
+    <b>Skills: <b><br>
+    <ul>
+        {% for ski in profile.skills %}
+            <li>{{ ski }}</li>
+        {% endfor %}
+    </ul><br>
+    <b>Resources: <b><br>
+    <ul>
+        {% for res in profile.resources %}
+            <li>{{ res }}</li>
+        {% endfor %}
+    </ul><br>
+    <b>What {{ profile.firstname }} wants to do:</b><br>
+    {{ profile.wdywtd }}<br><br>
+    <b>{{ profile.firstname }}'s needs:</b><br>
+    {{ profile.needs }}<br><br>
+    <b>{{ profile.firstname }}'s offerings:</b><br>
+    {{ profile.offerings }}<br><br>
+    <b>{{ profile.firstname }}'s ideal collaboration:</b><br>
+    {{ profile.ideal_collaboration }}
+    {% if own %}
+        <br><br><p> <a href="/edit_profile/{{ user.username}}/">Edit Profile</a>
+    {% endif %}
+{% else %}
+    {% if own %}
+        <p>You haven't created a profile yet! <a href="/create_profile/">Click here</a> to create one</p>
+    {% else %}
+        <p>This profile doesn't exist!</p>
+    {% endif %}
+{% endif %}
+</div>
+{% endblock %}

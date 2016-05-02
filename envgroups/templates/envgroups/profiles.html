@@ -1,0 +1,8 @@
+{% extends 'envgroups/main.html' %}
+{% block content %}
+<div class="container">
+{% for profile in profiles %}
+    <a href="/profile/{{ profile.username }}/"><h3>{{ profile.username }}</h3></a>
+{% endfor %}
+</div>
+{% endblock %}

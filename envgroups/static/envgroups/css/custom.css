@@ -12,3 +12,46 @@ footer {
     text-align: center;
     background-color: #2a2730
 }
+
+.Green-Bar {
+	background-color: #5FD769;
+	height: 30px;
+	width: 100%;
+}
+
+.featuredevent {
+
+}
+.img-thumbnail-projects {
+	padding: 10px;
+	border-style: none;
+	position: static;
+	visibility: visible;
+	width: 150px;
+	float: left;
+}
+.text-justify-projects {
+	float: left;
+	position: relative;
+	text-align: justify;
+	max-width: 84%;
+}
+.projects-aside {
+	width: 60px;
+}
+.projects-text {
+	text-align: justify;
+	display: block;
+	/* [disabled]width: 60%; */
+}
+
+/* unvisited link */
+a:link {
+    color: blue;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+

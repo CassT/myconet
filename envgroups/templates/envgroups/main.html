@@ -8,6 +8,8 @@
     <link href="{% static 'envgroups/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'envgroups/css/custom.css' %}" rel="stylesheet">
     <script src="{% static 'envgroups/js/respond.js' %}"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{% static 'envgroups/js/bootstrap.min.js' %}"></script> 
     {% block additional_headers %}{% endblock %}
 </head>
 
@@ -21,7 +23,8 @@
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
 
                             <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"><a href="/about/">About</a></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
@@ -33,13 +36,16 @@
                             <li><a href="/groups/">Groups</a></li>
                             <li><a href="/events/">Events</a></li>
                             <li><a href="/projects/">Projects</a></li>
+                            <li><a href="/profile/">Profiles</a></li>
+                            <li><a href="/blog/">Blog</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             {% if user.is_authenticated %}
+                                <li><a href="/profile/{{ user.username}}/">{{ user.username }}'s profile</a></li>
                                 <li><a href="/logout/">Logout</a></li>
                             {% else %}
-                                <li><a href="/login/">Login</a></li>
                                 <li><a href="/signup/">Sign Up</a></li>
+                                <li><a href="/login/">Login</a></li>
                             {% endif %}
                         </ul>
                     </div><!--end navbar-collapse-->
@@ -47,14 +53,22 @@
             </nav>
         </div><!--end row-->
     </div><!--end container-->
-
+       <div style="margin-top:50px"></div>
     {% block content %}
     {% endblock %}
 
     <!--footer-->
     <footer class="row">
-        <p>&copy; MyCoNet</p>
+<div class ="container">        
+        <p align=left>Contact us: MyCoNet.us@gmail.com ~ BoulderBiomimicry@gmail.com ~ &copy; MyCoNet</p>
+      <div class="pull-right">  
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="2PVPFCWBNUDH6">
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+</div></div>
     </footer>
-
 </body>
 </html>

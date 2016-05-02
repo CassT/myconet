@@ -1,0 +1,125 @@
+{% extends 'envgroups/main.html' %}
+{% block content %}
+
+<div style="margin-top:50px"></div>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Projects</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+<p>Our database of your projects for others to connect and collaborate with. Check back soon!</p>
+</div>
+</div>
+<br>
+<div style="border-top: 1px solid #848B96"></div>
+<br>
+<!--search-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <form method="POST" action= "/projects/" class="navbar-form navbar-left" role="search">
+        {% csrf_token %}
+            <div class="form-group">
+                <div id="dropdown">
+                    Type: <select name="project-type">
+                        <option value="">Any</option>
+                        <option value="SG">Academic</option>
+                        <option value="FP">Business</option>
+                        <option value="NP">Non Profit</option>
+                        <option value="GV">Government</option>
+                        <option value="UC">Unclassified</option>
+                    </select>
+                    &nbsp;
+                    Categories:<select name='project-category'>
+                        <option value="">Any</option>
+                        <option value="FO">Food</option>
+                        <option value="SO">Social</option>
+                        <option value="EN">Energy</option>
+                        <option value="AC">Activism</option>
+                        <option value="EV">Environment</option>
+                        <option value="PR">Projects</option>
+                        <option value="AR">Arts</option>
+                        <option value="ED">Education</option>
+                        <option value="PO">Policy</option>
+                        <option value="HO">Housing</option>
+                        <option value="WE">Wellness</option>
+                        <option value="RE">Research</option>
+                    </select>
+                </div>
+            </div>
+            &nbsp;
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="search_term">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+</nav>
+
+{% for project in projects %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h3><a href="/projects/{{ project.id }}/">{{ project.title }}</a></h3>
+            <h5>Categories:
+                {% for cat in project.categories %}
+                    <span>{{ cat }} </span>
+                {% endfor %}
+            </h5>
+            <h5>Skills:
+                {% for ski in project.skills %}
+                    <span>{{ ski }} </span>
+                {% endfor %}
+            </h5>
+            <h5>Resources:
+                {% for res in project.resources %}
+                    <span>{{ res }} </span>
+                {% endfor %}
+            </h5>
+            <p>{{ project.summary }}</p>
+            {% if detail %}
+                <p>Collaborators: {{ project.collaborator }}</p>
+                <p>Location: {{ project.location }}</p>
+                <p>Recruiting: {{ project.seeking_help }}</p>
+                <p>{{ project.help_text }}</p>
+                <p>Type: {{ project.project_type_label }}</p>
+{% comment %}
+                <p>Type: {{ project.ptype }}</p>
+{% endcomment %}
+                <p>Link: <a href="{{ project.link }}">{{project.link}}</a></p>
+                <p>Connections: {{ project.connections }}</p>
+                {% if user.is_authenticated %}
+                    <div style="border-top: 1px solid #848B96"></div>
+                    <div class="coment_form_block">
+                        <form action="./" method="POST">
+                            {% csrf_token %}
+                            <p class="form_label"><b>Submit a post</b></p>
+                            <input type="hidden" name="top_level" value="True">
+                            <input type="hidden" name="project_id" value="{{ project.id }}">
+                            <input type="hidden" name="username" value="{{ user.username }}">
+                            <p class="form_label">Title:</p><input type="text" name="title"><br>
+                            <p class="form_label">Content:</p><textarea name="content" rows="15" cols="150"></textarea><br>
+                            <input type="submit" value="Post Comment">
+                        </form>
+                     </div>
+                {% endif %}
+                {% if projectpostings %}
+                    <div style="border-top: 1px solid #848B96"></div>
+                    <h4>Comments:</h4>
+                    <div style="border-top: 1px solid #848B96"></div>
+                    {% for g in projectpostings %}
+                        <div class="comment_block">
+                            <p>{{ p.title }} by {{ p.username }} on {{ p.time }}</p>
+                            <p>{{ p.content }}<p>
+                        </div>
+                        <div style="border-top: 1px solid #848B96"></div>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <form method="POST" action="/groups/" class="mselectTOmcheckbox" role="search">
+        {% csrf_token %}
+            {{ form.as_p }}
+                    Type: <select name="group-type">
+                        <option value="">Any</option>
+                        <option value="SG">Academic</option>
+                        <option value="FP">Business</option>
+                        <option value="NP">Non Profit</option>
+                        <option value="GV">Government</option>
+                        <option value="UC">Unclassified</option>
+                    </select>
+                    &nbsp;
+                    Categories:<select name='group-category'>
+                        <option value="">Any</option>
+                        <option value="FO">Food</option>
+                        <option value="SO">Social</option>
+                        <option value="EN">Energy</option>
+                        <option value="AC">Activism</option>
+                        <option value="EV">Environment</option>
+                        <option value="PR">Projects</option>
+                        <option value="AR">Arts</option>
+                        <option value="ED">Education</option>
+                        <option value="PO">Policy</option>
+                        <option value="HO">Housing</option>
+                        <option value="WE">Wellness</option>
+                        <option value="RE">Research</option>
+                    </select>
+            &nbsp;
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="search_term">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+</nav>
+
